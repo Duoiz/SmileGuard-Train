@@ -1,0 +1,30 @@
+# --- Python Environment ---
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+ENV/
+
+# --- YOLOv8 / Ultralytics Outputs ---
+# This ignores the 'runs' folder where weights (.pt) and logs are saved
+runs/
+wandb/
+*.cache
+
+# --- Datasets ---
+# Datasets are usually too large for GitHub. 
+# It's better to keep the data.yaml but ignore the actual images/labels.
+yolo_dataset/test/
+yolo_dataset/train/
+yolo_dataset/val/
+dentalai-DatasetNinja/
+
+# --- Weights & Large Files ---
+*.pt
+*.onnx
+*.engine
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
