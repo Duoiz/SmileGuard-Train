@@ -24,6 +24,8 @@ dentalai-DatasetNinja/
 *.pt
 *.onnx
 *.engine
+*.kaggle
+*.yolo_dataset
 
 # --- OS Specific ---
 .DS_Store
