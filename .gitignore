@@ -19,12 +19,14 @@ yolo_dataset/test/
 yolo_dataset/train/
 yolo_dataset/val/
 dentalai-DatasetNinja/
+kaggle/input/dentalai-dataset/
+kaggle/working/yolo_dataset/
+kaggle/input/dentalai-dataset/
 
 # --- Weights & Large Files ---
 *.pt
 *.onnx
 *.engine
-*/kaggle
 *.yolo_dataset
 
 # --- OS Specific ---
