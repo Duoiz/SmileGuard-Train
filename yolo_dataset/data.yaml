@@ -1,6 +1,6 @@
 train: ../train/images
-val: ../val/images
+valid: ../valid/images
 test: ../test/images
 
-nc: 8
-names: ['incisor', 'canine', 'premolar', 'molar', 'caries', 'cavity', 'decay', 'crack']
+nc: 4
+names: ['caries', 'cavity', 'tooth', 'crack']
