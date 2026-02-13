@@ -5,30 +5,45 @@ __pycache__/
 *$py.class
 venv/
 ENV/
+*.egg-info/
+dist/
+build/
 
 # --- YOLOv8 / Ultralytics Outputs ---
-# This ignores the 'runs' folder where weights (.pt) and logs are saved
 runs/
 wandb/
 *.cache
+Dental_Detection/
 
-# --- Datasets ---
-# Datasets are usually too large for GitHub. 
-# It's better to keep the data.yaml but ignore the actual images/labels.
-yolo_dataset/test/
+# --- Datasets (images/labels too large for Git) ---
+# Keep data.yaml for reproducibility, ignore the bulk
 yolo_dataset/train/
 yolo_dataset/val/
+yolo_dataset/test/
+kaggle_yolo/
+yolo_dataset_merged/train/
+yolo_dataset_merged/val/
+yolo_dataset_merged/test/
+yolo_dataset_balanced/train/
+yolo_dataset_balanced/val/
+yolo_dataset_balanced/test/
 dentalai-DatasetNinja/
-kaggle/input/dentalai-dataset/
-kaggle/working/yolo_dataset/
-kaggle/input/dentalai-dataset/
+kaggle/
+
+# --- Kaggle cache ---
+.cache/kagglehub/
 
 # --- Weights & Large Files ---
 *.pt
 *.onnx
 *.engine
-*.yolo_dataset
+*.torchscript
+*.tflite
 
-# --- OS Specific ---
+# --- Notebook outputs & temp ---
+.ipynb_checkpoints/
+class_balance_analysis.png
+detection_result.jpg
 .DS_Store
 Thumbs.db
+desktop.ini

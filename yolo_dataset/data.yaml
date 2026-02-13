@@ -1,12 +1,6 @@
-train: ../train/images
-
-val: ../val/images
-
-test: ../test/images
-
-
+train: train/images
+val: val/images
+test: test/images
 
 nc: 4
-
 names: ['tooth', 'caries', 'cavity', 'crack']
-
