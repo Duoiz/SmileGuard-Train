@@ -24,6 +24,9 @@ kaggle_yolo/
 yolo_dataset_merged/train/
 yolo_dataset_merged/val/
 yolo_dataset_merged/test/
+yolo_dataset_balanced/train/
+yolo_dataset_balanced/val/
+yolo_dataset_balanced/test/
 dentalai-DatasetNinja/
 kaggle/
 
