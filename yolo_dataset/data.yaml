@@ -1,6 +1,10 @@
 train: ../train/images
-valid: ../valid/images
+val: ../val/images
 test: ../test/images
 
+
+
 nc: 4
-names: ['caries', 'cavity', 'tooth', 'crack']
+
+names: ['tooth', 'caries', 'cavity', 'crack']
+
