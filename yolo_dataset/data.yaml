@@ -1,10 +1,6 @@
-train: ../train/images
-val: ../val/images
-test: ../test/images
-
-
+train: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset/train/images
+val: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset/val/images
+test: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset/test/images
 
 nc: 4
-
 names: ['tooth', 'caries', 'cavity', 'crack']
-
