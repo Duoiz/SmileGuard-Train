@@ -17,6 +17,8 @@ Dental_Detection/
 
 # --- Datasets (images/labels too large for Git) ---
 # Keep data.yaml for reproducibility, ignore the bulk
+Roboflow-dataset/
+Dental-Dataset-roboflow/
 yolo_dataset/train/
 yolo_dataset/val/
 yolo_dataset/test/
@@ -39,6 +41,12 @@ kaggle/
 *.engine
 *.torchscript
 *.tflite
+
+# --- Temp scripts ---
+merge_and_trim.py
+trim_tooth_pass2.py
+remove_small_classes.py
+nul
 
 # --- Notebook outputs & temp ---
 .ipynb_checkpoints/
