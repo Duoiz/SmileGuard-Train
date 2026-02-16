@@ -1,6 +1,6 @@
-train: ./train/images
-val: ./val/images
-test: ./test/images
+train: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_merged/train/images
+val: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_merged/val/images
+test: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_merged/test/images
 
 nc: 9
 names: ['tooth', 'caries', 'cavity', 'crack', 'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration']
