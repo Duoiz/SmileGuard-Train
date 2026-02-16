@@ -43,10 +43,7 @@ kaggle/
 *.tflite
 
 # --- Temp scripts ---
-merge_and_trim.py
-trim_tooth_pass2.py
-remove_small_classes.py
-nul
+# nul
 
 # --- Notebook outputs & temp ---
 .ipynb_checkpoints/
