@@ -24,6 +24,8 @@ YOLOv8-based dental detection model that identifies teeth, caries, cavities, cra
    ```
 
 2. **Download the DentalAI dataset** from [DatasetNinja](https://datasetninja.com/dentalai#download) and place the `dentalai-DatasetNinja/` folder in the project root:
+3. **Download the Roboflow dataset too**
+   https://universe.roboflow.com/ds/VIfxZmemET?key=IZUynBzy09
 
    <img width="227" height="278" alt="image" src="https://github.com/user-attachments/assets/0dd58112-67d6-49c5-9c3a-ab1ad771727b" />
 
