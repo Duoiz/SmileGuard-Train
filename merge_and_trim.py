@@ -9,7 +9,7 @@ from collections import defaultdict
 
 random.seed(42)
 
-BASE = Path(r"c:/Users/PerezKylerLee(Studen/SmileGuard-Train")
+BASE = Path(r"C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train")
 ROBOFLOW = BASE / "Roboflow-dataset"
 MERGED = BASE / "yolo_dataset_merged"
 
