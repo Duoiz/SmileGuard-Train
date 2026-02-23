@@ -1,0 +1,205 @@
+# SmileGuard-Train TODO List
+
+## 📊 Dataset Tasks
+- [ ] The final dataset should have 5k images per class
+  - [ ] Check for raw annotations
+  - [ ] Verify data augmentation pipeline
+  - [ ] Ensure augmented images count meets 5k per class target
+  - BASIS: Compare raw annotations > Data augmented images conversion ratio
+
+## 🔴 Training Configuration Issues (CRITICAL - MUST FIX!)
+⚠️  CURRENT SETTINGS ARE NOT OPTIMIZED FOR FINE-TUNING!
+The code loads previous weights but uses training-from-scratch hyperparameters, causing OOM errors.
+
+- [ ] 🔥 Change EPOCHS: 200 → 50
+  📌 WHY: Transfer learning converges FASTER. Previous knowledge accelerates learning.
+  ✓ Fine-tuning needs fewer epochs (50 sufficient vs 200 for scratch training)
+  ✓ Prevents overtraining and "catastrophic forgetting" of learned features
+  
+- [ ] 🔥 Change BATCH_SIZE: 16 → 8
+  📌 WHY: Reduces GPU memory consumption per iteration by 50%
+  ✓ Your GPU hit OOM with batch=16 + img=1020
+  ✓ Stable gradients with controlled batch size during fine-tuning
+  
+- [ ] 🔥 Change IMAGE_SIZE: 1020 → 640
+  📌 WHY: MASSIVE memory impact - reduces memory by ~2.5x (1020²/640² = 2.53x)
+  ✓ Was causing out-of-memory errors even with batch_size=16
+  ✓ 640x640 is YOLO standard - sufficient for dental detection quality
+  ✓ Smaller images = faster training iterations
+  
+- [ ] 🔥 Change LEARNING_RATE (lr0): 0.0005 → 0.00005
+  📌 WHY: 10x LOWER learning rate is MANDATORY for transfer learning
+  ✓ Prevents overwriting weights learned from previous training (57.68% baseline)
+  ✓ Fine-tuning requires subtle adjustments, not aggressive retraining
+  ✓ Low LR + previous weights = better convergence to improved accuracy
+  
+- [ ] 🔥 Change WARMUP_EPOCHS: 5 → 2
+  📌 WHY: Shorter warmup accelerates fine-tuning convergence
+  ✓ Relevant only for initial training phases
+  ✓ Previous weights already "warm" - don't need long warmup
+  ✓ 2 epochs sufficient to stabilize learning rate schedule
+  
+- [ ] 🔥 Enable AMP=True (Mixed Precision Training)
+  📌 WHY: Reduces memory usage by ~40% with NO accuracy loss
+  ✓ Uses float16 for forward passes, float32 for gradients
+  ✓ Essential for fitting on limited VRAM
+  ✓ Actually speeds up training on modern GPUs
+  
+- [ ] 🔥 Set WORKERS=0 (Data Loader Workers)
+  📌 WHY: Prevents data loader from consuming extra GPU/system memory
+  ✓ Multi-worker data loading allocates separate GPU memory per worker
+  ✓ With workers=0, loading happens single-threaded but memory-safe
+  ✓ Trades slight speed for stability (negligible when batch_size=8)
+  
+- [ ] 🔥 Reduce MOSAIC: 1.0 → 0.8
+  📌 WHY: Mosaic augmentation creates larger intermediate tensors in memory
+  ✓ 80% mosaic (instead of 100%) reduces augmentation memory overhead
+  ✓ Still provides mosaic benefits, just less aggressive
+  ✓ Minimal accuracy impact, significant memory savings
+  
+- [ ] 🔥 Reduce MIXUP: default → 0.05
+  📌 WHY: Mixup requires storing and blending multiple images simultaneously
+  ✓ 5% mixup (vs 10%) = 50% less memory for blended batches
+  ✓ Still adds regularization without memory stress
+  ✓ Prevents gradient computation from exploding memory usage
+
+## 📋 Dataset Verification Tasks
+- [ ] Create verification cell to confirm dataset has 5k images per class
+  - [ ] Count images in yolo_dataset_balanced per class
+  - [ ] Verify split ratios (train/val/test)
+  - [ ] Print visualization of class distribution
+  - [ ] Validate all labels are properly formatted
+  - [ ] ENSURE: Each class has exactly 5000 annotations (±tolerance)
+
+## 📈 Model Validation & Learning Curve Analysis Tasks
+- [ ] Add comprehensive learning curve analysis test
+  - [ ] Document ALL augmentation parameters in use:
+    * hsv_h, hsv_s, hsv_v (color jitter)
+    * degrees, translate, scale (geometric transforms)
+    * mosaic, mixup (advanced augmentation)
+    * flipud, fliplr (flipping)
+    
+  - [ ] Document ALL training hyperparameters:
+    * batch_size, lr0, lrf (learning rate schedule)
+    * warmup_epochs, optimizer (SGD/Adam)
+    * weight_decay, momentum
+    
+  - [ ] COMPARE AGAINST BASELINE (57.68% mAP50):
+    * Baseline mAP50: 57.68% (previous training)
+    * Current mAP50: [to be filled - run training first]
+    * Improvement: [Calculate: (Current - 57.68) / 57.68 * 100]
+    * GOAL: Should improve to 58-62% with transfer learning
+    
+  - [ ] Generate 3 visualizations:
+    ✓ Training loss curve (should decrease smoothly)
+    ✓ Validation mAP curve (should increase to plateau)
+    ✓ Class-wise precision/recall bar chart
+    
+  - [ ] Verify transfer learning is working:
+    ✓ Early epochs should show rapid improvement (inherited knowledge)
+    ✓ Convergence should happen by epoch 20-30 (not 150+)
+    ✓ Final loss should be lower than baseline
+
+## 🧪 Test 1: Dataset Verification (CRITICAL)
+- [ ] Count images in yolo_dataset_balanced per class
+  - [ ] Create counter loop for each class folder
+  - [ ] Print table: Class | Total | Train | Val | Test
+  - [ ] VERIFY: Each class has 5000± images
+  - [ ] VERIFY: Train/Val/Test splits are correct (should be ~80/15/5 or similar)
+  - [ ] Visual: Generate bar chart showing images per class
+  - ⚠️  If any class < 3000 images = UNDER-SAMPLED, need data augmentation
+  - ⚠️  If any class > 6000 images = OVER-SAMPLED, need to trim
+
+## 🧪 Test 2: Test Set Evaluation (CRITICAL)
+- [ ] Run inference on ENTIRE TEST SPLIT to get final metrics
+  - [ ] Load best.pt model
+  - [ ] Run predictions on test/images folder
+  - [ ] Calculate metrics: mAP50, mAP50-95, Precision, Recall, F1-Score
+  - [ ] COMPARE VS BASELINE:
+    * Baseline: 57.68% mAP50 (previous training)
+    * Current: [to be filled]
+    * ✓ IMPROVEMENT: Should be > 57.68% (goal: 58-62%)
+    * ❌ REGRESSION: If < 57%, analyze why (learning rate too high? not enough epochs?)
+  - [ ] Generate visualization: Predicted bboxes on 5-10 test images
+  - [ ] Print: Per-class metrics (does model work better on some classes?)
+
+## 🧪 Test 3: DentalDetector Class Inference Testing
+- [ ] Create test script to validate DentalDetector class
+  - [ ] Load model: `detector = DentalDetector('best.pt')`
+  - [ ] Test on 10 sample test images (mix of good/bad quality)
+  - [ ] Run inference and check:
+    ✓ All detections have valid class IDs (0-8)
+    ✓ All confidence scores in range [0, 1]
+    ✓ All bounding boxes within image boundaries
+    ✓ No NaN/Inf values in predictions
+  - [ ] Visual inspection: Save predictions with drawn boxes
+  - [ ] Verify: Do detected classes make sense? (caries only on damaged teeth, etc)
+
+## 🧪 Test 4: Edge Cases & Failure Modes
+- [ ] Test with problematic images:
+  - [ ] Blank/empty image (no teeth) → Should detect 0 objects
+  - [ ] Blurry image → Check confidence scores (should be low)
+  - [ ] Extreme angle/rotation → Can model handle it?
+  - [ ] Very small teeth → Detection limit test
+  - [ ] Very large/close teeth → Bbox limits test
+  - [ ] Multiple overlapping detections → NMS handling
+  - [ ] Dark/bright images → Robustness test
+  - Record: Which edge cases fail? Where to improve?
+
+## 🧪 Test 5: API Endpoint Implementation & Testing
+- [ ] Create Flask API endpoint
+  - [ ] Endpoint: POST /predict
+  - [ ] Input: Image file (jpg/png)
+  - [ ] Output: JSON with detections
+    ```json
+    {
+      "image_name": "test.jpg",
+      "detections": [
+        {"class": "caries", "confidence": 0.95, "bbox": [x1,y1,x2,y2]},
+        {"class": "tooth", "confidence": 0.87, "bbox": [x1,y1,x2,y2]}
+      ],
+      "processing_time_ms": 45
+    }
+    ```
+  - [ ] Test endpoint with 5 different images
+  - [ ] Verify response format is valid JSON
+  - [ ] Test error handling (bad file, missing image, etc)
+  - [ ] Test timeout (max inference time < 500ms goal)
+
+## 🧪 Test 6: Model Robustness & Generalization
+- [ ] Test on completely unseen dental images (not from training/val/test)
+  - [ ] If available: Find external dental dataset images
+  - [ ] Compare performance: trained data vs external data
+  - [ ] ⚠️  Large gap = model may overfit to training distribution
+  - ✓ Small gap = good generalization
+  - [ ] Document: Does accuracy drop? By how much?
+
+## 📊 Summary: Baseline vs Current Performance
+- [ ] Fill in comparison table:
+  ```
+  METRIC          | BASELINE  | CURRENT | IMPROVEMENT | STATUS
+  ─────────────────────────────────────────────────────────────
+  mAP50           | 57.68%    | [?]     | [?]         | ✓/❌
+  mAP50-95        | [?]       | [?]     | [?]         | ✓/❌
+  Precision       | [?]       | [?]     | [?]         | ✓/❌
+  Recall          | [?]       | [?]     | [?]         | ✓/❌
+  F1-Score        | [?]       | [?]     | [?]         | ✓/❌
+  Training Time   | original  | faster  | 10-20x ✓    | ✓
+  Inference Speed | original  | 2.5x    | faster ✓    | ✓
+  ```
+
+## 📝 Summary of Impact
+When ALL changes applied:
+- Memory: 2.5x reduction (img 1020→640) + 50% (batch 16→8) + 40% (AMP) = ~5x total
+- Speed: 2.5x faster iterations (smaller images)
+- Epochs: 4x fewer (50 vs 200)
+- Total training time: Expected 10-20x faster
+- Expected accuracy: 58-62% mAP (vs 57.68% baseline) = +0.32-4.32% improvement
+
+## ⚠️ CRITICAL NOTES
+- Current notebook has transfer learning CODE but WRONG hyperparameters
+- This is why you got OOM errors with 57GB free RAM!
+- Fixing these parameters is MANDATORY before retraining
+- Using transfer learning with LOW learning rate will prevent "forgetting" and improve accuracy
+- Tests 1-3 should be run FIRST (dataset & inference validation)
+- Tests 4-6 are optional but recommended for production deployment

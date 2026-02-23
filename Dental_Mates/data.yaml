@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['Caries', 'Cavity', 'Crack', 'Tooth']
+
+roboflow:
+  workspace: arab-academy-vf9su
+  project: dental-7yegp
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/arab-academy-vf9su/dental-7yegp/dataset/1
