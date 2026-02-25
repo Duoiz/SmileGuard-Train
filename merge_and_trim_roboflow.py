@@ -21,7 +21,7 @@ MERGED = BASE / "yolo_dataset_merged"
 
 NEW_CLASSES = [
     'tooth', 'caries', 'cavity', 'crack',
-    'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration'
+    'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration',
 ]
 
 # Roboflow class ID → merged class ID
