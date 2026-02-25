@@ -64,7 +64,7 @@ The code loads previous weights but uses training-from-scratch hyperparameters, 
   ✓ Prevents gradient computation from exploding memory usage
 
 ## 📋 Dataset Verification Tasks
-- [ ] Create verification cell to confirm dataset has 5k images per class
+- [/] Create verification cell to confirm dataset has 5k images per class
   - [ ] Count images in yolo_dataset_balanced per class
   - [ ] Verify split ratios (train/val/test)
   - [ ] Print visualization of class distribution

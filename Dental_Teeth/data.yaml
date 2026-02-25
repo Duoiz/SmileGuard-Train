@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['Caries', 'Cavity', 'Crack', 'Tooth', 'tooth']
+
+roboflow:
+  workspace: chandanab
+  project: teeth-8cswa
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/chandanab/teeth-8cswa/dataset/2
