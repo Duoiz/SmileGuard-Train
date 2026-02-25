@@ -22,6 +22,7 @@ MERGED = BASE / "yolo_dataset_merged"
 CLASSES = [
     'tooth', 'caries', 'cavity', 'crack',
     'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration',
+    'braces', 'misaligned_tooth',
 ]
 
 # Import Cavity, Crack, and Tooth from Dental_Mates. Caries (0) is excluded.

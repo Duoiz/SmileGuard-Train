@@ -28,9 +28,9 @@ NEW_CLASSES = [
 # Dental-Dataset-roboflow: 0=Braces, 1=Caries, 2=Cavity, 3=Misaligned tooth, 4=Plaque, 5=crown
 # Plaque and crown are excluded (not in target class set)
 ROBOFLOW_TO_MERGED = {
-    0: 9,   # Braces           → braces
     2: 2,   # Cavity           → cavity
-    3: 10,  # Misaligned tooth → misaligned_tooth
+    9: 9,   # Braces           → braces
+    10: 10,  # Misaligned tooth → misaligned_tooth
 }
 
 # Split mapping: Roboflow folder → merged folder

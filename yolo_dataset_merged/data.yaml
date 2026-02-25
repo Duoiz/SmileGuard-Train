@@ -2,5 +2,5 @@ train: ./train/images
 val: ./val/images
 test: ./test/images
 
-nc: 9
-names: ['tooth', 'caries', 'cavity', 'crack', 'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration']
+nc: 10
+names: ['tooth', 'caries', 'cavity', 'crack', 'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration', 'braces']
