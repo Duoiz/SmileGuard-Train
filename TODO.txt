@@ -11,53 +11,53 @@
 ⚠️  CURRENT SETTINGS ARE NOT OPTIMIZED FOR FINE-TUNING!
 The code loads previous weights but uses training-from-scratch hyperparameters, causing OOM errors.
 
-- [ ] 🔥 Change EPOCHS: 200 → 50
+- [/] 🔥 Change EPOCHS: 200 → 50
   📌 WHY: Transfer learning converges FASTER. Previous knowledge accelerates learning.
   ✓ Fine-tuning needs fewer epochs (50 sufficient vs 200 for scratch training)
   ✓ Prevents overtraining and "catastrophic forgetting" of learned features
   
-- [ ] 🔥 Change BATCH_SIZE: 16 → 8
+- [/] 🔥 Change BATCH_SIZE: 16 → 8
   📌 WHY: Reduces GPU memory consumption per iteration by 50%
   ✓ Your GPU hit OOM with batch=16 + img=1020
   ✓ Stable gradients with controlled batch size during fine-tuning
   
-- [ ] 🔥 Change IMAGE_SIZE: 1020 → 640
+- [/] 🔥 Change IMAGE_SIZE: 1020 → 640
   📌 WHY: MASSIVE memory impact - reduces memory by ~2.5x (1020²/640² = 2.53x)
   ✓ Was causing out-of-memory errors even with batch_size=16
   ✓ 640x640 is YOLO standard - sufficient for dental detection quality
   ✓ Smaller images = faster training iterations
   
-- [ ] 🔥 Change LEARNING_RATE (lr0): 0.0005 → 0.00005
+- [/] 🔥 Change LEARNING_RATE (lr0): 0.0005 → 0.00005
   📌 WHY: 10x LOWER learning rate is MANDATORY for transfer learning
   ✓ Prevents overwriting weights learned from previous training (57.68% baseline)
   ✓ Fine-tuning requires subtle adjustments, not aggressive retraining
   ✓ Low LR + previous weights = better convergence to improved accuracy
   
-- [ ] 🔥 Change WARMUP_EPOCHS: 5 → 2
+- [/] 🔥 Change WARMUP_EPOCHS: 5 → 2
   📌 WHY: Shorter warmup accelerates fine-tuning convergence
   ✓ Relevant only for initial training phases
   ✓ Previous weights already "warm" - don't need long warmup
   ✓ 2 epochs sufficient to stabilize learning rate schedule
   
-- [ ] 🔥 Enable AMP=True (Mixed Precision Training)
+- [/] 🔥 Enable AMP=True (Mixed Precision Training)
   📌 WHY: Reduces memory usage by ~40% with NO accuracy loss
   ✓ Uses float16 for forward passes, float32 for gradients
   ✓ Essential for fitting on limited VRAM
   ✓ Actually speeds up training on modern GPUs
   
-- [ ] 🔥 Set WORKERS=0 (Data Loader Workers)
+- [ /] 🔥 Set WORKERS=0 (Data Loader Workers)
   📌 WHY: Prevents data loader from consuming extra GPU/system memory
   ✓ Multi-worker data loading allocates separate GPU memory per worker
   ✓ With workers=0, loading happens single-threaded but memory-safe
   ✓ Trades slight speed for stability (negligible when batch_size=8)
   
-- [ ] 🔥 Reduce MOSAIC: 1.0 → 0.8
+- [/] 🔥 Reduce MOSAIC: 1.0 → 0.8
   📌 WHY: Mosaic augmentation creates larger intermediate tensors in memory
   ✓ 80% mosaic (instead of 100%) reduces augmentation memory overhead
   ✓ Still provides mosaic benefits, just less aggressive
   ✓ Minimal accuracy impact, significant memory savings
   
-- [ ] 🔥 Reduce MIXUP: default → 0.05
+- [/] 🔥 Reduce MIXUP: default → 0.05
   📌 WHY: Mixup requires storing and blending multiple images simultaneously
   ✓ 5% mixup (vs 10%) = 50% less memory for blended batches
   ✓ Still adds regularization without memory stress
