@@ -1,0 +1,13 @@
+names:
+- tooth
+- caries
+- calculus
+- gingivitis
+- hypodontia
+- mouth_ulcer
+- tooth_discoloration
+nc: 7
+path: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_balanced
+test: test/images
+train: train/images
+val: val/images
