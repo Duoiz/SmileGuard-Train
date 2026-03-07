@@ -1,5 +1,13 @@
 names:
+- tooth
+- caries
+- calculus
+- gingivitis
+- hypodontia
+- mouth_ulcer
+- tooth_discoloration
 nc: 7
-train: ./yolo_dataset_balanced/train/images
-val: ./yolo_dataset_balanced/val/images
-test: ./yolo_dataset_balanced/test/images
+path: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset_balanced
+test: test/images
+train: train/images
+val: val/images

@@ -1,0 +1,6 @@
+train: C:/Users/PerezKylerLee(Studen/SmileGuard-Train/yolo_dataset_merged/train/images
+val: C:/Users/PerezKylerLee(Studen/SmileGuard-Train/yolo_dataset_merged/val/images
+test: C:/Users/PerezKylerLee(Studen/SmileGuard-Train/yolo_dataset_merged/test/images
+
+nc: 7
+names: ['tooth', 'caries', 'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration']
