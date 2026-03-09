@@ -7,7 +7,7 @@ names:
 - mouth_ulcer
 - tooth_discoloration
 nc: 7
-path: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset_balanced
+path: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_balanced
 test: test/images
 train: train/images
 val: val/images
