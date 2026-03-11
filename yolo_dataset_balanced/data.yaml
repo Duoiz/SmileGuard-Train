@@ -1,6 +1,11 @@
-train: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset_balanced/train/images
-val: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset_balanced/val/images
-test: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset_balanced/test/images
-
-nc: 9
-names: ['tooth', 'caries', 'cavity', 'crack', 'calculus', 'gingivitis', 'hypodontia', 'mouth_ulcer', 'tooth_discoloration']
+names:
+- tooth
+- caries
+- calculus
+- gingivitis
+- tooth_discoloration
+nc: 5
+path: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_balanced
+test: test/images
+train: train/images
+val: val/images
