@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 8
+names: ['CALCULUS', 'Cavity', 'Fillings', 'Impacted Tooth', 'Implant', 'caries', 'decay', 'infected-teeth']
+
+roboflow:
+  workspace: detection-b0acc
+  project: dental-detectin2
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/detection-b0acc/dental-detectin2/dataset/1
