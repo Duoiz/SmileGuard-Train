@@ -19,17 +19,6 @@ Dental_Detection/
 # Keep data.yaml for reproducibility, ignore the bulk
 Datasets/
 smileguard_merged/
-Roboflow-dataset/
-Dental-Dataset-roboflow/
-Dental-Dataset-roboflow2/
-Dental_Thesis_yolo/
-yolo_dataset/
-yolo_dataset_balanced/
-yolo_dataset_merged/
-dentalai-DatasetNinja/
-kaggle/
-kaggle_yolo/
-
 # --- Kaggle cache ---
 .cache/kagglehub/
 
@@ -41,14 +30,6 @@ kaggle_yolo/
 *.tflite
 
 # --- Image Files ---
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-*.tiff
-*.webp
-*.ico
 
 # --- Temp scripts ---
 # nul
