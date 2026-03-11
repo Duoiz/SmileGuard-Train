@@ -1,6 +1,0 @@
-train: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset/train/images
-val: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset/val/images
-test: C:\Users\PerezKylerLee(Studen\SmileGuard-Train\yolo_dataset/test/images
-
-nc: 3
-names: ['tooth', 'caries', 'cavity']

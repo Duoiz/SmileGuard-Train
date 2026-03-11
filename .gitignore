@@ -18,7 +18,7 @@ Dental_Detection/
 # --- Datasets (images/labels too large for Git) ---
 # Keep data.yaml for reproducibility, ignore the bulk
 Datasets/
-smileguard_mrged/
+smileguard_merged/
 Roboflow-dataset/
 Dental-Dataset-roboflow/
 Dental-Dataset-roboflow2/
