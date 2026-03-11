@@ -3,10 +3,8 @@ names:
 - caries
 - calculus
 - gingivitis
-- hypodontia
-- mouth_ulcer
 - tooth_discoloration
-nc: 7
+nc: 5
 path: C:\Users\nangi\OneDrive\Documents\Code\Expo\SmileGuard-Train\yolo_dataset_balanced
 test: test/images
 train: train/images
