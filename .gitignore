@@ -17,8 +17,16 @@ Dental_Detection/
 
 # --- Datasets (images/labels too large for Git) ---
 # Keep data.yaml for reproducibility, ignore the bulk
-Datasets/
+Dataset/
 smileguard_merged/
+dentalai-DatasetNinja/
+Handoff/
+Roboflow-dataset/
+kaggle/
+kaggle_yolo/
+yolo_dataset/
+yolo_dataset_merged/
+yolo_dataset_balanced/
 # --- Kaggle cache ---
 .cache/kagglehub/
 
